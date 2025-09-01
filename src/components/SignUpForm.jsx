@@ -34,17 +34,17 @@ const SignUpForm = () => {
           className={`px-4 py-2 rounded-lg border ${
             status === "pregnant"
               ? "bg-pink-500 text-white"
-              : "bg-white text-gray-600"
+              : "bg-gray-100  text-gray-600"
           }`}
           onClick={() => setStatus("pregnant")}
         >
           Pregnant
         </button>
         <button
-          className={`px-4 py-2 rounded-lg border ${
+          className={` px-4 py-2 rounded-lg border ${
             status === "postpartum"
               ? "bg-pink-500 text-white"
-              : "bg-white text-gray-600"
+              : "bg-gray-100 text-gray-600"
           }`}
           onClick={() => setStatus("postpartum")}
         >
