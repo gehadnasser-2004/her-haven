@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import CardList from "./CardList";
+import Footer from "./Footer";
 
 function HeroImage() {
+  const navigate = useNavigate();
   return (
     <div className="flex py-7 justify-center min-h-screen min-w-screen">
       <div className="flex flex-col items-start p-4 w-[960px] h-[512px]">
@@ -37,10 +40,12 @@ function HeroImage() {
             Ready to Begin?
           </h2>
           <div className="flex justify-center w-full">
-          <button className="bg-pink-550 text-white py-2 px-4 rounded-[10px] mb-10">
+          <button className="bg-pink-550 text-white py-2 px-4 rounded-[10px] mb-10"
+          onClick={() => navigate("/select")} >
             Get Started
           </button>
           </div>
+          <Footer />
         </div>
       </div>
     </div>
