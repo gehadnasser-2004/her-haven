@@ -1,4 +1,4 @@
-import React from 'react'
+import CardList from "./CardList";
 
 function HeroImage() {
   return (
@@ -17,6 +17,29 @@ function HeroImage() {
               personalized tracking, expert support, and resources for a healthy
               motherhood.
             </p>
+          </div>
+        </div>
+        <div className="mt-8">
+          <h2 className="font-semibold text-[24px] leading-[40px] mb-12">
+            What We Offer
+          </h2>
+          <div className="w-[640px]">
+            <div className="font-bold text-[32px] leading-[40px] mb-4">
+              Comprehensive Support for Every Stage
+            </div>
+            <p className="mb-8">
+              Her haven provides a suite of tools and resources designed to
+              support you throughout your pregnancy and postpartum journey.
+            </p>
+          </div>
+          <CardList />
+          <h2 className="font-semibold text-[24px] leading-[40px] my-12">
+            Ready to Begin?
+          </h2>
+          <div className="flex justify-center w-full">
+          <button className="bg-pink-550 text-white py-2 px-4 rounded-[10px] mb-10">
+            Get Started
+          </button>
           </div>
         </div>
       </div>
