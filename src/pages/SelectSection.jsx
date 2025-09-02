@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import LandingNav from "../components/Landing/LandingNav";
+
 export default function SelectSection() {
+  const navigate = useNavigate();
+
   return (
     <>
       <LandingNav>
-        <button className="bg-pink-550 text-white py-2 px-4 rounded-[10px] mr-3">
+        <button className="bg-pink-550 text-white py-2 px-4 rounded-[10px] mr-3"
+        onClick={() => navigate("/signup")}>
           Sign Up
         </button>
       </LandingNav>

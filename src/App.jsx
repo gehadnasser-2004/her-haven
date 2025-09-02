@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Homepage from './pages/Homepage';
 import SelectSection from './pages/SelectSection';
 
-  function App() {
+function App() {
     return (
       <Routes>
       <Route index element={<Homepage />} />
