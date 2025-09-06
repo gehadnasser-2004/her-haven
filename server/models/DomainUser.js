@@ -11,18 +11,6 @@ const CalendarEventSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const ReminderSchema = new mongoose.Schema(
-  {
-    frequency: { type: String, required: true },
-    title: { type: String, required: true },
-    description: { type: String },
-    time: { type: String },
-    active: { type: Boolean, default: true },
-    created_at: { type: Date, default: Date.now },
-  },
-  { _id: false }
-);
-
 const ScanSchema = new mongoose.Schema(
   {
     scan_img: { type: String, required: true },
@@ -46,7 +34,7 @@ const DomainUserSchema = new mongoose.Schema(
     num_children: { type: Number },
     settings: { type: mongoose.Schema.Types.Mixed },
     calendar: [CalendarEventSchema],
-    reminders: [ReminderSchema],
+    reminders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reminder" }],
     scans: [ScanSchema],
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }

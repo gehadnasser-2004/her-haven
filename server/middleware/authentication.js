@@ -1,19 +1,33 @@
 import { errors as CustomError } from "../errors/index.js";
 import { isTokenValid, attachCookiesToResponse } from "../utils/jwt.js";
 import Token from "../models/Token.js";
-const authenticateUser = async (req, res, next) => {
-  const { refreshToken, accessToken } = req.signedCookies;
 
+const authenticateUser = async (req, res, next) => {
+  // Check for Bearer token in Authorization header
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    try {
+      const payload = isTokenValid(token);
+      req.user = { userId: payload.userId, role: payload.role };
+      return next();
+    } catch (error) {
+      throw new CustomError.UnauthenticatedError("Authentication Invalid");
+    }
+  }
+
+  // Fallback to cookies (legacy)
+  const { refreshToken, accessToken } = req.signedCookies;
   try {
     if (accessToken) {
       const payload = isTokenValid(accessToken);
-      req.user = payload.user;
+      req.user = { userId: payload.userId, role: payload.role };
       return next();
     }
     const payload = isTokenValid(refreshToken);
 
     const existingToken = await Token.findOne({
-      user: payload.user.userId,
+      user: payload.userId,
       refreshToken: payload.refreshToken,
     });
 
@@ -23,11 +37,11 @@ const authenticateUser = async (req, res, next) => {
 
     attachCookiesToResponse({
       res,
-      user: payload.user,
+      user: { userId: payload.userId, role: payload.role },
       refreshToken: existingToken.refreshToken,
     });
 
-    req.user = payload.user;
+    req.user = { userId: payload.userId, role: payload.role };
     next();
   } catch (error) {
     throw new CustomError.UnauthenticatedError("Authentication Invalid");
@@ -45,4 +59,4 @@ const authorizePermissions = (...roles) => {
   };
 };
 
-export { authenticateUser, authorizePermissions };
+export default { authenticateUser, authorizePermissions };
