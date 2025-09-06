@@ -41,9 +41,6 @@ const AccountSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Ensure a unique index on email (enforced at DB level)
-AccountSchema.index({ email: 1 }, { unique: true });
-
 AccountSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
   const salt = await bcrypt.genSalt(10);
