@@ -8,6 +8,7 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 
 import authRoutes from "./routes/auth.js";
 import reminderRoutes from "./routes/reminder.js";
+import calendarRoutes from "./routes/calendar.js";
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ app.use("/api/v1/auth", authRoutes);
 
 // Reminders routes
 app.use("/api/v1/reminders", reminderRoutes);
+
+// Calendar routes
+app.use("/api/v1/calendar", calendarRoutes);
 
 // Health check
 app.get("/api/v1/health", (req, res) => {

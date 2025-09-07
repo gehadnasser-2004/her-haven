@@ -1,16 +1,5 @@
 import mongoose from "mongoose";
 
-const CalendarEventSchema = new mongoose.Schema(
-  {
-    title: { type: String, required: true },
-    date: { type: Date, required: true },
-    description: { type: String },
-    completed: { type: Boolean, default: false },
-    created_at: { type: Date, default: Date.now },
-  },
-  { _id: false }
-);
-
 const ScanSchema = new mongoose.Schema(
   {
     scan_img: { type: String, required: true },
@@ -33,7 +22,7 @@ const DomainUserSchema = new mongoose.Schema(
     num_preg: { type: Number },
     num_children: { type: Number },
     settings: { type: mongoose.Schema.Types.Mixed },
-    calendar: [CalendarEventSchema],
+    calendar: [{ type: mongoose.Schema.Types.ObjectId, ref: "CalendarEvent" }],
     reminders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reminder" }],
     scans: [ScanSchema],
   },
