@@ -23,6 +23,7 @@ const DomainUserSchema = new mongoose.Schema(
     num_children: { type: Number },
     settings: { type: mongoose.Schema.Types.Mixed },
     calendar: [{ type: mongoose.Schema.Types.ObjectId, ref: "CalendarEvent" }],
+
     reminders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reminder" }],
     scans: [ScanSchema],
   },
