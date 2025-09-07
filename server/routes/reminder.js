@@ -1,18 +1,19 @@
 import express from "express";
-import {
-  createReminder,
-  getReminders,
-  updateReminder,
-  deleteReminder,
-} from "../controllers/reminderController.js";
+import reminderController from "../controllers/reminderController.js";
 import auth from "../middleware/authentication.js";
 
 const router = express.Router();
 
 router.use(auth.authenticateUser);
 
-router.route("/").get(getReminders).post(createReminder);
+router
+  .route("/")
+  .get(reminderController.getReminders)
+  .post(reminderController.createReminder);
 
-router.route("/:id").put(updateReminder).delete(deleteReminder);
+router
+  .route("/:id")
+  .put(reminderController.updateReminder)
+  .delete(reminderController.deleteReminder);
 
 export default router;
